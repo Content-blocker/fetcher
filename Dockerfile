@@ -1,11 +1,11 @@
 FROM openjdk:8
 
-RUN mkdir /ai
+RUN mkdir /fetcher
 
-WORKDIR /ai
+WORKDIR /fetcher
 
-ADD ./ai-api/target/ai-api-1.0.0.jar /ai
+ADD ./fetcher-api/target/fetcher-api-1.0.0.jar /fetcher
 
-EXPOSE 8080
+EXPOSE 8083
 
-CMD ["java", "-jar", "ai-api-1.0.0.jar"]
+CMD ["java", "-jar", "fetcher-api-1.0.0.jar"]
