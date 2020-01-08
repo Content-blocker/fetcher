@@ -1,0 +1,4 @@
+.idea/
+target/
+fetcher-api/target/
+travis.log
