@@ -1,11 +1,11 @@
 kumuluzee:
-  name: ai
+  name: fetcher
   env:
     name: test
   version: 1.0.0
   server:
     http:
-      port: 8082
+      port: 8083
   #datasources:
   #  - jndi-name: jdbc/ImageMetadataDS
   #    connection-url: jdbc:postgresql://192.168.29.109:5432/image-metadata
@@ -17,7 +17,7 @@ kumuluzee:
       hosts: http://34.89.142.186:2379/
   health:
     servlet:
-      mapping: /ai/health
+      mapping: /fetcher/health
       enabled: true
     logs:
       enabled: true
@@ -26,8 +26,8 @@ kumuluzee:
         connection-url: http://34.89.142.186:2379/health
   metrics:
     web-instrumentation:
-      - name: ai-api
-        url-pattern: /ai/api/*
+      - name: fetcher-api
+        url-pattern: /fetcher/api/*
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                             <Configuration name="comments">
@@ -43,11 +43,11 @@ kumuluzee:
                                 <Loggers>
                                     <!-- Default logger -->
                                     <Root level="all">
-                                        <AppenderRef ref="console" level="trace"/>
+                                        <AppenderRef ref="console" level="info"/>
                                         <AppenderRef ref="logstash" level="trace"/>
                                     </Root>
                                 </Loggers>
                             </Configuration>'
 configuration-properties:
-  ai:
+  fetcher:
     enabled: true

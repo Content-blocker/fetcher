@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kumuluzee.blocker.fetcher</groupId>
-    <artifactId>ai</artifactId>
+    <artifactId>fetcher</artifactId>
     <version>1.0.0</version>
     <modules>
         <module>fetcher-api</module>

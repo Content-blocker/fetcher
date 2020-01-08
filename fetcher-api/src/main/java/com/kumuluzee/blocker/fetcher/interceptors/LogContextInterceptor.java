@@ -1,4 +1,4 @@
-package com.kumuluzee.blocker.ai.interceptors;
+package com.kumuluzee.blocker.fetcher.interceptors;
 
 import com.kumuluz.ee.common.config.EeConfig;
 import com.kumuluz.ee.common.runtime.EeRuntime;

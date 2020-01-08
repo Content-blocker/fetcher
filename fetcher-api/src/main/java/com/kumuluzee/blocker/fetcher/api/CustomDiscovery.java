@@ -1,4 +1,4 @@
-package com.kumuluzee.blocker.ai.api;
+package com.kumuluzee.blocker.fetcher.api;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
