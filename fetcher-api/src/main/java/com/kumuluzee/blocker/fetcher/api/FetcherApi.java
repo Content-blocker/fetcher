@@ -30,6 +30,7 @@ public class FetcherApi {
         String links = "";
         if(fetcherTarget.isPresent()){
             links += "<a href='"+ fetcherString + "/fetcher/api/integrations'>fetcher/api/integrations</a><br>";
+            links += "<a href='"+ fetcherString + "/fetcher/health'>fetcher/health</a><br>";
         }
         return "Hellow world! <br> I fetch. <br><br>" + links;
     }
