@@ -3,14 +3,17 @@ package com.kumuluzee.blocker.fetcher.api;
 import com.kumuluz.ee.logs.cdi.Log;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Log
-@RequestScoped
+@ApplicationScoped
 @Path("/api")
 @Produces(MediaType.TEXT_PLAIN)
 @Consumes(MediaType.TEXT_PLAIN)
@@ -22,6 +25,9 @@ public class FetcherApi {
     static String providerString = (providerTarget.isPresent() ? providerTarget.get().getUri().toString() : "Empty");
     static String fetcherString = (fetcherTarget.isPresent() ? fetcherTarget.get().getUri().toString() : "Empty");
 
+    @Inject
+    Fetcher fetcher;
+
     @GET
     @Timed
     @Produces(MediaType.TEXT_HTML)
@@ -29,8 +35,10 @@ public class FetcherApi {
     public String getResources() {
         String links = "";
         if(fetcherTarget.isPresent()){
+            links += "<a href='"+ fetcherString + "/fetcher/api/fetched'>fetcher/api/fetched</a><br>";
             links += "<a href='"+ fetcherString + "/fetcher/api/integrations'>fetcher/api/integrations</a><br>";
             links += "<a href='"+ fetcherString + "/fetcher/health'>fetcher/health</a><br>";
+            links += "<div>plane</div><br>";
         }
         return "Hellow world! <br> I fetch. <br><br>" + links;
     }
@@ -69,5 +77,24 @@ public class FetcherApi {
 
         out += "</body>";
         return out;
+    }
+
+    @GET
+    @Timed
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/fetched")
+    public Response fetched() {
+        Response fetched = fetcher.getFetchedObject();
+        if(fetched == null){
+            return Response
+                    .status(Response.Status.EXPECTATION_FAILED)
+                    .entity("{\"status\":\"failed\"}")
+                    .build();
+        }
+        return Response
+                .status(fetched.getStatus())
+                .entity(fetched.getEntity())
+                .build();
     }
 }
