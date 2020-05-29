@@ -2,3 +2,4 @@
 target/
 fetcher-api/target/
 travis.log
+*.iml
